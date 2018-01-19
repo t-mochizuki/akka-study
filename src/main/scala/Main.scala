@@ -10,15 +10,17 @@ object Main extends App {
 
   val getSpeed = system.actorOf(Props[GetSpeed], "getSpeed")
 
-  getSpeed ! GetSpeedEvent("40km/h", None)
+  val data = Data("40km/h", java.time.LocalDate.now, "な17-17")
+
+  getSpeed ! GetSpeedEvent(data, None)
 
   val getTime = system.actorOf(Props[GetTime], "getTime")
 
-  getTime ! GetTimeEvent(java.time.LocalDate.now.toString, None)
+  getTime ! GetTimeEvent(data, None)
 
   val getNumberPlate = system.actorOf(Props[GetNumberPlate], "getNumberPlate")
 
-  getNumberPlate ! GetNumberPlateEvent("な17-17", None)
+  getNumberPlate ! GetNumberPlateEvent(data, None)
 
   system.terminate()
 }

@@ -16,7 +16,8 @@ class GetSpeedSpec extends TestKit(ActorSystem("testsystem"))
   describe("GetSpeed") {
     it("should be 40km/h") {
       val actor = system.actorOf(Props[GetSpeed])
-      actor ! Event("40km/h", Some(testActor))
+      val data = Data("40km/h", java.time.LocalDate.now, "な17-17")
+      actor ! Event(data, Some(testActor))
       expectMsg("40km/h")
     }
   }

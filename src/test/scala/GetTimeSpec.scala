@@ -2,9 +2,8 @@ package sample
 
 import akka.actor.{ ActorSystem, Props }
 import akka.testkit.TestKit
-import java.time.LocalDate
 import org.scalatest.{ BeforeAndAfterAll, FunSpecLike }
-import sample.GetSpeed.Event
+import sample.GetTime.Event
 
 class GetTimeSpec extends TestKit(ActorSystem("testsystem"))
   with FunSpecLike
@@ -16,10 +15,10 @@ class GetTimeSpec extends TestKit(ActorSystem("testsystem"))
 
   describe("GetTime") {
     it("should be Now") {
-      val actor = system.actorOf(Props[GetSpeed])
-      val msg = LocalDate.now.toString
-      actor ! Event(msg, Some(testActor))
-      expectMsg(msg)
+      val actor = system.actorOf(Props[GetTime])
+      val data = Data("40km/h", java.time.LocalDate.now, "な17-17")
+      actor ! Event(data, Some(testActor))
+      expectMsg(data.time)
     }
   }
 }

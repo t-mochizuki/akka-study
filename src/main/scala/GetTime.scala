@@ -3,7 +3,7 @@ package sample
 import akka.actor.{ Actor, ActorLogging, ActorRef }
 
 object GetTime {
-  case class Event(msg: String, optionActorRef: Option[ActorRef])
+  case class Event(data: Data, optionActorRef: Option[ActorRef])
 }
 
 class GetTime extends Actor with ActorLogging {
@@ -11,9 +11,9 @@ class GetTime extends Actor with ActorLogging {
 
   def receive = {
     case event: Event =>
-      log.info(s"GetTime: ${event.msg}")
+      log.info(s"GetTime: ${event.data.time}")
       event.optionActorRef.foreach {
-        _ ! event.msg
+        _ ! event.data.time
       }
   }
 }

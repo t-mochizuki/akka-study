@@ -3,7 +3,7 @@ package sample
 import akka.actor.{ Actor, ActorLogging, ActorRef }
 
 object GetSpeed {
-  case class Event(msg: String, optionActorRef: Option[ActorRef])
+  case class Event(data: Data, optionActorRef: Option[ActorRef])
 }
 
 class GetSpeed extends Actor with ActorLogging {
@@ -11,9 +11,9 @@ class GetSpeed extends Actor with ActorLogging {
 
   def receive = {
     case event: Event =>
-      log.info(s"GetSpeed: ${event.msg}")
+      log.info(s"GetSpeed: ${event.data.speed}")
       event.optionActorRef.foreach {
-        _ ! event.msg
+        _ ! event.data.speed
       }
   }
 }

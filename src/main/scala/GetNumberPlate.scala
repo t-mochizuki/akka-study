@@ -3,7 +3,7 @@ package sample
 import akka.actor.{ Actor, ActorLogging, ActorRef }
 
 object GetNumberPlate {
-  case class Event(msg: String, optionActorRef: Option[ActorRef])
+  case class Event(data: Data, optionActorRef: Option[ActorRef])
 }
 
 class GetNumberPlate extends Actor with ActorLogging {
@@ -11,9 +11,9 @@ class GetNumberPlate extends Actor with ActorLogging {
 
   def receive = {
     case event: Event =>
-      log.info(s"GetNumberPlate: ${event.msg}")
+      log.info(s"GetNumberPlate: ${event.data.numberPlate}")
       event.optionActorRef.foreach {
-        _ ! event.msg
+        _ ! event.data.numberPlate
       }
   }
 }
