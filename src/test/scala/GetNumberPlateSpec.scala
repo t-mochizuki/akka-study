@@ -3,7 +3,6 @@ package sample
 import akka.actor.{ ActorSystem, Props }
 import akka.testkit.TestKit
 import org.scalatest.{ BeforeAndAfterAll, FunSpecLike }
-import sample.GetNumberPlate.Event
 
 class GetNumberPlateSpec extends TestKit(ActorSystem("testsystem"))
   with FunSpecLike
@@ -15,7 +14,7 @@ class GetNumberPlateSpec extends TestKit(ActorSystem("testsystem"))
 
   describe("GetNumberPlate") {
     it("should be な17-17") {
-      val actor = system.actorOf(Props[GetNumberPlate])
+      val actor = system.actorOf(Props(classOf[GetNumberPlate], None))
       val data = Data("40km/h", java.time.LocalDate.now, "な17-17")
       actor ! Event(data, Some(testActor))
       expectMsg("な17-17")

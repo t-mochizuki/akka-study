@@ -1,19 +1,13 @@
 package sample
 
-import akka.actor.{ Actor, ActorLogging, ActorRef }
+import akka.actor.{Actor, ActorLogging, ActorRef}
 
-object GetSpeed {
-  case class Event(data: Data, optionActorRef: Option[ActorRef])
-}
-
-class GetSpeed extends Actor with ActorLogging {
-  import GetSpeed._
+class GetSpeed(optionNext: Option[ActorRef]) extends Actor with ActorLogging {
 
   def receive = {
     case event: Event =>
       log.info(s"GetSpeed: ${event.data.speed}")
-      event.optionActorRef.foreach {
-        _ ! event.data.speed
-      }
+      optionNext.foreach(_ ! event)
+      event.optionActorRef.foreach(_ ! event.data.speed)
   }
 }

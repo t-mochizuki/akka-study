@@ -1,19 +1,13 @@
 package sample
 
-import akka.actor.{ Actor, ActorLogging, ActorRef }
+import akka.actor.{Actor, ActorLogging, ActorRef, Props}
 
-object GetTime {
-  case class Event(data: Data, optionActorRef: Option[ActorRef])
-}
-
-class GetTime extends Actor with ActorLogging {
-  import GetTime._
+class GetTime(optionNext: Option[ActorRef]) extends Actor with ActorLogging {
 
   def receive = {
     case event: Event =>
       log.info(s"GetTime: ${event.data.time}")
-      event.optionActorRef.foreach {
-        _ ! event.data.time
-      }
+      optionNext.foreach(_ ! event)
+      event.optionActorRef.foreach(_ ! event.data.time)
   }
 }
