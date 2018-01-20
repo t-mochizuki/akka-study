@@ -2,12 +2,12 @@ package sample
 
 import akka.actor.{ Actor, ActorLogging, ActorRef }
 
-class GetNumberPlate(optionNext: Option[ActorRef]) extends Actor with ActorLogging {
+class GetNumberPlate extends Actor with ActorLogging {
 
   def receive = {
     case event: Event =>
+      // Thread.sleep(5000)
       log.info(s"GetNumberPlate: ${event.data.numberPlate}")
-      optionNext.foreach(_ ! event)
       event.optionActorRef.foreach(_ ! event.data.numberPlate)
   }
 }

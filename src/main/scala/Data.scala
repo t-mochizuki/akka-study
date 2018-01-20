@@ -1,3 +1,3 @@
 package sample
 
-case class Data(speed: String, time: java.time.LocalDate, numberPlate: String)
+case class Data(speed: String, time: java.time.LocalDate, numberPlate: String, count: Int)

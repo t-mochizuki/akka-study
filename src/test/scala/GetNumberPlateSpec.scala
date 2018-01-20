@@ -14,8 +14,8 @@ class GetNumberPlateSpec extends TestKit(ActorSystem("testsystem"))
 
   describe("GetNumberPlate") {
     it("should be な17-17") {
-      val actor = system.actorOf(Props(classOf[GetNumberPlate], None))
-      val data = Data("40km/h", java.time.LocalDate.now, "な17-17")
+      val actor = system.actorOf(Props[GetNumberPlate])
+      val data = Data("40km/h", java.time.LocalDate.now, "な17-17", 1)
       actor ! Event(data, Some(testActor))
       expectMsg("な17-17")
     }

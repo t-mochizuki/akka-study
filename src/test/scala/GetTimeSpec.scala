@@ -14,8 +14,8 @@ class GetTimeSpec extends TestKit(ActorSystem("testsystem"))
 
   describe("GetTime") {
     it("should be Now") {
-      val actor = system.actorOf(Props(classOf[GetTime], None))
-      val data = Data("40km/h", java.time.LocalDate.now, "な17-17")
+      val actor = system.actorOf(Props[GetTime])
+      val data = Data("40km/h", java.time.LocalDate.now, "な17-17", 1)
       actor ! Event(data, Some(testActor))
       expectMsg(data.time)
     }
