@@ -1,13 +1,16 @@
 package sample
 
-import akka.actor.{Actor, ActorLogging, ActorRef, Terminated}
+import akka.actor.{Actor, ActorLogging, Props, Terminated}
 
 
-class Supervisor(getSpeed: ActorRef, getTime: ActorRef, getNumberPlate: ActorRef) extends Actor with ActorLogging {
+class Supervisor extends Actor with ActorLogging {
 
-  context.watch(getSpeed)
-  context.watch(getTime)
+  val getNumberPlate = context.actorOf(Props[GetNumberPlate], "getNumberPlate")
   context.watch(getNumberPlate)
+  val getTime = context.actorOf(Props[GetTime], "getTime")
+  context.watch(getTime)
+  val getSpeed = context.actorOf(Props[GetSpeed], "getSpeed")
+  context.watch(getSpeed)
 
   def receive = {
     case Terminated(actorRef) =>

@@ -1,6 +1,6 @@
 package sample
 
-import akka.actor.{ Actor, ActorLogging, ActorRef }
+import akka.actor.{ Actor, ActorLogging }
 
 class GetNumberPlate extends Actor with ActorLogging {
 

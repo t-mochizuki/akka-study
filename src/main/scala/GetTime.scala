@@ -1,6 +1,6 @@
 package sample
 
-import akka.actor.{Actor, ActorLogging, ActorRef, Props}
+import akka.actor.{Actor, ActorLogging}
 
 class GetTime extends Actor with ActorLogging {
 

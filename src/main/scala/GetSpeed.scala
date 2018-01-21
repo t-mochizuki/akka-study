@@ -1,6 +1,6 @@
 package sample
 
-import akka.actor.{Actor, ActorLogging, ActorRef}
+import akka.actor.{Actor, ActorLogging}
 
 class GetSpeed extends Actor with ActorLogging {
 
