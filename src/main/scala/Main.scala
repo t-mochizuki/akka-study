@@ -10,12 +10,12 @@ object Main extends App {
   val getSpeed = system.actorOf(Props[GetSpeed], "getSpeed")
   val supervisor = system.actorOf(Props(classOf[Supervisor], getSpeed, getTime, getNumberPlate), "supervisor")
 
-  val data = Data("40km/h", java.time.LocalDate.now, "な17-17", 5) // 81 seconds
-                                                                   // 81 = 1 + 15 * 5 + 5
+  val data = Data("40km/h", java.time.LocalDate.now, "な17-17", 5) // 8.1 seconds
+                                                                   // 8.1 = 0.1 + 1.5 * 5 + 0.5
 
   supervisor ! GetSpeedEvent(data, None)
 
-  Thread.sleep(1000)
+  Thread.sleep(10000)
 
   system.terminate()
 }
